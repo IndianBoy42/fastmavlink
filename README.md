@@ -49,6 +49,51 @@ Please see the chapter below on the [C Code Architecture](#c-code-architecture) 
 
 For examples please go to [The fastMavlink Library: Examples](examples/).
 
+### CMake Integration ###
+
+FastMavlink provides CMake support for easy integration into CMake-based projects. You can use it in several ways:
+
+#### Using FetchContent (Recommended) ####
+
+```cmake
+include(FetchContent)
+FetchContent_Declare(
+    fastmavlink
+    GIT_REPOSITORY https://github.com/indianboy42/fastmavlink.git
+    GIT_TAG main  # or specify a specific tag/commit
+)
+FetchContent_MakeAvailable(fastmavlink)
+
+# Link against the dialect you need
+target_link_libraries(your_target fastmavlink::common)
+```
+
+#### Using find_package ####
+
+If you have installed fastmavlink system-wide:
+
+```cmake
+find_package(fastmavlink REQUIRED)
+target_link_libraries(your_target fastmavlink::common)
+```
+
+#### Available Dialects ####
+
+The following dialects are available as CMake targets:
+
+- `fastmavlink::common` (most commonly used)
+- `fastmavlink::asluav`
+- `fastmavlink::avssuas` 
+- `fastmavlink::ardupilotmega`
+- `fastmavlink::cubepilot`
+- `fastmavlink::icarous`
+- `fastmavlink::minimal`
+- `fastmavlink::python_array_test`
+- `fastmavlink::storm32`
+- `fastmavlink::ualberta`
+
+### Manual Integration ###
+
 In order to use the dialect `xyzdialect` (defined via a xyzdialect.xml dialect definition file), include the header file xyzdialect.h into your project:
 
 ```C
